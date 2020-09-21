@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Techbuzz_testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EXPERIENCE">
+          <Key>
+            <PropertyRef Name="EXPERIENCE_ID" />
+          </Key>
+          <Property Name="EXPERIENCE_ID" Type="int" Nullable="false" />
+          <Property Name="EXPERIENCE_DESC" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="JOB_APPIED">
+          <Key>
+            <PropertyRef Name="APPLIED_ID" />
+          </Key>
+          <Property Name="APPLIED_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JOB_ID" Type="int" />
+          <Property Name="LOGINID" Type="varchar" MaxLength="30" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="APPLIED_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JOB_POSTINGS">
+          <Key>
+            <PropertyRef Name="JOB_ID" />
+          </Key>
+          <Property Name="JOB_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JOB_TITLE" Type="varchar" MaxLength="50" />
+          <Property Name="JOB_DESCRIPTION" Type="varchar(max)" />
+          <Property Name="COMPANY" Type="varchar" MaxLength="100" />
+          <Property Name="experience" Type="varchar" MaxLength="20" />
+          <Property Name="posted_by" Type="varchar" MaxLength="100" />
+          <Property Name="category" Type="varchar" MaxLength="20" />
+          <Property Name="Location" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QnID" />
+          </Key>
+          <Property Name="QnID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Qn" Type="varchar" MaxLength="250" />
+          <Property Name="ImageName" Type="varchar" MaxLength="50" />
+          <Property Name="Option1" Type="varchar" MaxLength="50" />
+          <Property Name="Option2" Type="varchar" MaxLength="50" />
+          <Property Name="Option3" Type="varchar" MaxLength="50" />
+          <Property Name="Option4" Type="varchar" MaxLength="50" />
+          <Property Name="Answer" Type="int" />
+          <Property Name="Ques_type" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TEST_SCORES">
+          <Key>
+            <PropertyRef Name="TEST_SCORE_ID" />
+          </Key>
+          <Property Name="TEST_SCORE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOGINID" Type="varchar" MaxLength="30" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="EXPERIENCE_ID" Type="varchar" MaxLength="1" />
+          <Property Name="FRONT_END_SCORE" Type="varchar" MaxLength="5" />
+          <Property Name="BACK_END_SCORE" Type="varchar" MaxLength="5" />
+          <Property Name="DATABASE_SCORE" Type="varchar" MaxLength="5" />
+          <Property Name="TEST_TAKEN_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="USER_QUERY">
+          <Key>
+            <PropertyRef Name="QUERY_ID" />
+          </Key>
+          <Property Name="QUERY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FULL_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="EMAIL_ADDRESS" Type="varchar" MaxLength="150" />
+          <Property Name="USER_DESC" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="USER_RESPONSE">
+          <Key>
+            <PropertyRef Name="USER_RESPONSE_ID" />
+          </Key>
+          <Property Name="USER_RESPONSE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QUES_ID" Type="int" />
+          <Property Name="USER_RESP_ANS" Type="varchar" MaxLength="1" />
+          <Property Name="LOGINID" Type="varchar" MaxLength="30" />
+          <Property Name="USERID" Type="int" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="USERID" />
+          </Key>
+          <Property Name="USERID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="MIDDLE_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="LAST_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="PHONE_NUMBER" Type="varchar" MaxLength="20" />
+          <Property Name="EMAIL_ADDRESS" Type="varchar" MaxLength="200" />
+          <Property Name="LOGINID" Type="varchar" MaxLength="30" />
+          <Property Name="PWD" Type="varchar" MaxLength="100" />
+          <Property Name="USER_GROUP" Type="varchar" MaxLength="20" />
+          <Property Name="EXPERIENCE_ID" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <Function Name="spInsertUserData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FIRST_NAME" Type="varchar" Mode="In" />
+          <Parameter Name="MIDDLE_NAME" Type="varchar" Mode="In" />
+          <Parameter Name="LAST_NAME" Type="varchar" Mode="In" />
+          <Parameter Name="PHONE_NUMBER" Type="varchar" Mode="In" />
+          <Parameter Name="EMAIL_ADDRESS" Type="varchar" Mode="In" />
+          <Parameter Name="LOGINID" Type="varchar" Mode="In" />
+          <Parameter Name="PWD" Type="varchar" Mode="In" />
+          <Parameter Name="USER_GROUP" Type="varchar" Mode="In" />
+          <Parameter Name="EXPERIENCE_ID" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertUserQueryData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FULL_NAME" Type="varchar" Mode="In" />
+          <Parameter Name="EMAIL_ADDRESS" Type="varchar" Mode="In" />
+          <Parameter Name="USER_DESC" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="spUserLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LoginId" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="Techbuzz_testModelStoreContainer">
+          <EntitySet Name="EXPERIENCE" EntityType="Self.EXPERIENCE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JOB_APPIED" EntityType="Self.JOB_APPIED" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JOB_POSTINGS" EntityType="Self.JOB_POSTINGS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEST_SCORES" EntityType="Self.TEST_SCORES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_QUERY" EntityType="Self.USER_QUERY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_RESPONSE" EntityType="Self.USER_RESPONSE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Techbuzz_testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EXPERIENCE">
+          <Key>
+            <PropertyRef Name="EXPERIENCE_ID" />
+          </Key>
+          <Property Name="EXPERIENCE_ID" Type="Int32" Nullable="false" />
+          <Property Name="EXPERIENCE_DESC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="JOB_APPIED">
+          <Key>
+            <PropertyRef Name="APPLIED_ID" />
+          </Key>
+          <Property Name="APPLIED_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JOB_ID" Type="Int32" />
+          <Property Name="LOGINID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="APPLIED_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="JOB_POSTINGS">
+          <Key>
+            <PropertyRef Name="JOB_ID" />
+          </Key>
+          <Property Name="JOB_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JOB_TITLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JOB_DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="COMPANY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="experience" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="posted_by" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="category" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QnID" />
+          </Key>
+          <Property Name="QnID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Qn" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ImageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Option1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Option2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Option3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Option4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Answer" Type="Int32" />
+          <Property Name="Ques_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TEST_SCORES">
+          <Key>
+            <PropertyRef Name="TEST_SCORE_ID" />
+          </Key>
+          <Property Name="TEST_SCORE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOGINID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="EXPERIENCE_ID" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="FRONT_END_SCORE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="BACK_END_SCORE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="DATABASE_SCORE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="TEST_TAKEN_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="USER_QUERY">
+          <Key>
+            <PropertyRef Name="QUERY_ID" />
+          </Key>
+          <Property Name="QUERY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FULL_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL_ADDRESS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="USER_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="USER_RESPONSE">
+          <Key>
+            <PropertyRef Name="USER_RESPONSE_ID" />
+          </Key>
+          <Property Name="USER_RESPONSE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QUES_ID" Type="Int32" />
+          <Property Name="USER_RESP_ANS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="LOGINID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="USERID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="USERID" />
+          </Key>
+          <Property Name="USERID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIRST_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MIDDLE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PHONE_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL_ADDRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LOGINID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PWD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="USER_GROUP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EXPERIENCE_ID" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="Techbuzz_testEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EXPERIENCEs" EntityType="Self.EXPERIENCE" />
+          <EntitySet Name="JOB_APPIED" EntityType="Self.JOB_APPIED" />
+          <EntitySet Name="JOB_POSTINGS" EntityType="Self.JOB_POSTINGS" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="TEST_SCORES" EntityType="Self.TEST_SCORES" />
+          <EntitySet Name="USER_QUERY" EntityType="Self.USER_QUERY" />
+          <EntitySet Name="USER_RESPONSE" EntityType="Self.USER_RESPONSE" />
+          <EntitySet Name="USERS" EntityType="Self.USER" />
+          <FunctionImport Name="spInsertUserData">
+            <Parameter Name="FIRST_NAME" Mode="In" Type="String" />
+            <Parameter Name="MIDDLE_NAME" Mode="In" Type="String" />
+            <Parameter Name="LAST_NAME" Mode="In" Type="String" />
+            <Parameter Name="PHONE_NUMBER" Mode="In" Type="String" />
+            <Parameter Name="EMAIL_ADDRESS" Mode="In" Type="String" />
+            <Parameter Name="LOGINID" Mode="In" Type="String" />
+            <Parameter Name="PWD" Mode="In" Type="String" />
+            <Parameter Name="USER_GROUP" Mode="In" Type="String" />
+            <Parameter Name="EXPERIENCE_ID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertUserQueryData">
+            <Parameter Name="FULL_NAME" Mode="In" Type="String" />
+            <Parameter Name="EMAIL_ADDRESS" Mode="In" Type="String" />
+            <Parameter Name="USER_DESC" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spUserLogin" ReturnType="Collection(Techbuzz_testModel.spUserLogin_Result)">
+            <Parameter Name="LoginId" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="spUserLogin_Result">
+          <Property Type="String" Name="LOGINID" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="USERNAME" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="EMAIL_ADDRESS" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="USER_GROUP" Nullable="true" MaxLength="20" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Techbuzz_testModelStoreContainer" CdmEntityContainer="Techbuzz_testEntities">
+          <EntitySetMapping Name="EXPERIENCEs">
+            <EntityTypeMapping TypeName="Techbuzz_testModel.EXPERIENCE">
+              <MappingFragment StoreEntitySet="EXPERIENCE">
+                <ScalarProperty Name="EXPERIENCE_ID" ColumnName="EXPERIENCE_ID" />
+                <ScalarProperty Name="EXPERIENCE_DESC" ColumnName="EXPERIENCE_DESC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JOB_APPIED">
+            <EntityTypeMapping TypeName="Techbuzz_testModel.JOB_APPIED">
+              <MappingFragment StoreEntitySet="JOB_APPIED">
+                <ScalarProperty Name="APPLIED_ID" ColumnName="APPLIED_ID" />
+                <ScalarProperty Name="JOB_ID" ColumnName="JOB_ID" />
+                <ScalarProperty Name="LOGINID" ColumnName="LOGINID" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="APPLIED_DATE" ColumnName="APPLIED_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JOB_POSTINGS">
+            <EntityTypeMapping TypeName="Techbuzz_testModel.JOB_POSTINGS">
+              <MappingFragment StoreEntitySet="JOB_POSTINGS">
+                <ScalarProperty Name="JOB_ID" ColumnName="JOB_ID" />
+                <ScalarProperty Name="JOB_TITLE" ColumnName="JOB_TITLE" />
+                <ScalarProperty Name="JOB_DESCRIPTION" ColumnName="JOB_DESCRIPTION" />
+                <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
+                <ScalarProperty Name="experience" ColumnName="experience" />
+                <ScalarProperty Name="posted_by" ColumnName="posted_by" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="Techbuzz_testModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="QnID" ColumnName="QnID" />
+                <ScalarProperty Name="Qn" ColumnName="Qn" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="Option1" ColumnName="Option1" />
+                <ScalarProperty Name="Option2" ColumnName="Option2" />
+                <ScalarProperty Name="Option3" ColumnName="Option3" />
+                <ScalarProperty Name="Option4" ColumnName="Option4" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Ques_type" ColumnName="Ques_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEST_SCORES">
+            <EntityTypeMapping TypeName="Techbuzz_testModel.TEST_SCORES">
+              <MappingFragment StoreEntitySet="TEST_SCORES">
+                <ScalarProperty Name="TEST_SCORE_ID" ColumnName="TEST_SCORE_ID" />
+                <ScalarProperty Name="LOGINID" ColumnName="LOGINID" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="EXPERIENCE_ID" ColumnName="EXPERIENCE_ID" />
+                <ScalarProperty Name="FRONT_END_SCORE" ColumnName="FRONT_END_SCORE" />
+                <ScalarProperty Name="BACK_END_SCORE" ColumnName="BACK_END_SCORE" />
+                <ScalarProperty Name="DATABASE_SCORE" ColumnName="DATABASE_SCORE" />
+                <ScalarProperty Name="TEST_TAKEN_DATE" ColumnName="TEST_TAKEN_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_QUERY">
+            <EntityTypeMapping TypeName="Techbuzz_testModel.USER_QUERY">
+              <MappingFragment StoreEntitySet="USER_QUERY">
+                <ScalarProperty Name="QUERY_ID" ColumnName="QUERY_ID" />
+                <ScalarProperty Name="FULL_NAME" ColumnName="FULL_NAME" />
+                <ScalarProperty Name="EMAIL_ADDRESS" ColumnName="EMAIL_ADDRESS" />
+                <ScalarProperty Name="USER_DESC" ColumnName="USER_DESC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_RESPONSE">
+            <EntityTypeMapping TypeName="Techbuzz_testModel.USER_RESPONSE">
+              <MappingFragment StoreEntitySet="USER_RESPONSE">
+                <ScalarProperty Name="USER_RESPONSE_ID" ColumnName="USER_RESPONSE_ID" />
+                <ScalarProperty Name="QUES_ID" ColumnName="QUES_ID" />
+                <ScalarProperty Name="USER_RESP_ANS" ColumnName="USER_RESP_ANS" />
+                <ScalarProperty Name="LOGINID" ColumnName="LOGINID" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="Techbuzz_testModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="MIDDLE_NAME" ColumnName="MIDDLE_NAME" />
+                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />
+                <ScalarProperty Name="EMAIL_ADDRESS" ColumnName="EMAIL_ADDRESS" />
+                <ScalarProperty Name="LOGINID" ColumnName="LOGINID" />
+                <ScalarProperty Name="PWD" ColumnName="PWD" />
+                <ScalarProperty Name="USER_GROUP" ColumnName="USER_GROUP" />
+                <ScalarProperty Name="EXPERIENCE_ID" ColumnName="EXPERIENCE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spInsertUserData" FunctionName="Techbuzz_testModel.Store.spInsertUserData" />
+          <FunctionImportMapping FunctionImportName="spInsertUserQueryData" FunctionName="Techbuzz_testModel.Store.spInsertUserQueryData" />
+          <FunctionImportMapping FunctionImportName="spUserLogin" FunctionName="Techbuzz_testModel.Store.spUserLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Techbuzz_testModel.spUserLogin_Result">
+                <ScalarProperty Name="LOGINID" ColumnName="LOGINID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="EMAIL_ADDRESS" ColumnName="EMAIL_ADDRESS" />
+                <ScalarProperty Name="USER_GROUP" ColumnName="USER_GROUP" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
