@@ -15,6 +15,7 @@ namespace TechBuzzApi.Controllers
         [Route("api/Questions")]
         public HttpResponseMessage GetQuestions()
         {
+        unused variable
             using (Techbuzz_testEntities db = new Techbuzz_testEntities())
             {
                 var Qns = db.Questions
